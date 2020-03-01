@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap');
+.bank-card{
+    width: 340px;
+    height: 215px;
+    border: 1px solid black;
+    border-radius: 15px;
+    font-family: 'ZCOOL QingKe HuangYou' ;
+}
+.number{
+    margin: 120px 40px 0 40px;
+    width: 260px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+}
+.date,.name{
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.payment-system{
+    height: 64px;
+    position: absolute;
+    top:160px;
+    left:280px
+}
