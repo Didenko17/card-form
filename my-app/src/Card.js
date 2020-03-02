@@ -23,7 +23,6 @@ class Card extends React.Component {
     }
     render(){
         const number=this.getNumber(this.props.number);
-        console.log(number);
         return (
             <div className="bank-card">
                 <div className='number'>

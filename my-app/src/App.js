@@ -8,12 +8,15 @@ class App extends React.Component {
       number:'',
       date:[],
       name:'',
-      cvv:'000',
+      cvv:'',
     };
     this.nameChange=this.nameChange.bind(this);
     this.numberChange=this.numberChange.bind(this);
+    this.monthChange=this.monthChange.bind(this);
+    this.yearChange=this.yearChange.bind(this);
+    this.cvvChange=this.cvvChange.bind(this);
   }
-  componentDidMount(){
+  componentWillMount(){
     const temp = new Date();
     const month=(temp.getMonth()+1<10)?'0'+(temp.getMonth()+1):temp.getMonth()+1;
     this.setState({
@@ -34,6 +37,48 @@ class App extends React.Component {
       })
     }
   }
+  monthChange(e){
+    this.setState({
+      date:[e.target.value,this.state.date[1]]
+    })
+  }
+  yearChange(e){
+    this.setState({
+      date:[this.state.date[0],e.target.value]
+    })
+  }
+  cvvChange(e){
+    if(((e.target.value>='0'&&e.target.value<='9')||e.target.value=='')&&(this.state.cvv.length<3||e.target.value.length<this.state.cvv.length)){
+      this.setState({
+        cvv:e.target.value
+      });
+    }
+  }
+  setMonth(){
+    let result=[];
+    const date=new Date();
+    const month=date.getMonth()+1;
+    const year=date.getFullYear()-2000;
+    if(this.state.date[1]>year){
+      for(let i=1;i<=12;i++){
+      result.push(<option value={i<10?'0'+i:i}>{i}</option>);
+      }
+    }else{
+      for(let i=month;i<=12;i++){
+        result.push(<option value={i<10?'0'+i:i}>{i}</option>);
+      }
+    }
+    return result;
+  }
+  setYear(){
+    const date= new Date();
+    const year=date.getFullYear()-2000;
+    let result=[];
+    for(let i=year;i<year+5;i++){
+      result.push(<option value={i}>{i}</option>);
+    }
+    return result;
+  }
   render(){
     return (
       <div className='App'>
@@ -43,6 +88,16 @@ class App extends React.Component {
           <input id="name" type="text" value={this.state.name} onChange={this.nameChange}></input>
           <label for="number">Card Number</label>
           <input id="number" type="text" value={this.state.number} onChange={this.numberChange}></input>
+          <label for="month">Expiration Date</label>
+          <select id="month" value={this.state.date[0]} onChange={this.monthChange}>
+            {this.setMonth()}
+          </select>
+          <select id="year" value={this.state.date[1]} onChange={this.yearChange}>
+            {this.setYear()}
+          </select>
+          <label for="cvv">CVV</label>
+          <input type="password" value={this.state.cvv} onChange={this.cvvChange}></input>
+          {this.state.cvv}
         </form>
       </div>
       );
