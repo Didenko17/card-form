@@ -24,17 +24,21 @@ class App extends React.Component {
     })
   }
   nameChange(e){
-    if(this.state.name.length<25||e.target.value.length<this.state.name.length){
+    if(!e.target.value.match(/[^a-zA-Z-\s]/)&&(this.state.name.length<25||e.target.value.length<this.state.name.length)){
       this.setState({
         name:e.target.value
       });
+    }else if(e.target.value.match(/[^a-zA-Z-\s]/)){
+      alert('We expect the name to contain uppercase letters, lowercase letters, a hyphen, and a space. If your name contains other characters, please contact our email vladislav.didenko.2001@gmail.com');
     }
   }
   numberChange(e){
-    if(this.state.number.length<16||e.target.value.length<this.state.number.length){
+    if(!e.target.value.match(/\D/)&&(this.state.number.length<16||e.target.value.length<this.state.number.length)){
       this.setState({
         number:e.target.value
       })
+    }else if(e.target.value.match(/\D/)){
+      alert('Card Number must contain 16 digits');
     }
   }
   monthChange(e){
@@ -48,10 +52,13 @@ class App extends React.Component {
     })
   }
   cvvChange(e){
-    if(((e.target.value>='0'&&e.target.value<='9')||e.target.value=='')&&(this.state.cvv.length<3||e.target.value.length<this.state.cvv.length)){
+
+    if(!e.target.value.match(/\D/)&&(this.state.cvv.length<3||e.target.value.length<this.state.cvv.length)){
       this.setState({
         cvv:e.target.value
       });
+    }else if(e.target.value.match(/\D/)){
+      alert('CVV must contain 3 digits');
     }
   }
   setMonth(){
@@ -97,7 +104,6 @@ class App extends React.Component {
           </select>
           <label for="cvv">CVV:</label>
           <input type="password" id="cvv" value={this.state.cvv} onChange={this.cvvChange}></input>
-          {this.state.cvv}
         </form>
       </div>
       );
