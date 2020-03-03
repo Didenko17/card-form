@@ -84,19 +84,19 @@ class App extends React.Component {
       <div className='App'>
         <Card number={this.state.number} date={this.state.date} name={this.state.name?this.state.name:'Your Name'}/>
         <form>
-          <label for="name">Card Holder</label>
+          <label for="name">Card Holder:</label>
           <input id="name" type="text" value={this.state.name} onChange={this.nameChange}></input>
-          <label for="number">Card Number</label>
+          <label for="number">Card Number:</label>
           <input id="number" type="text" value={this.state.number} onChange={this.numberChange}></input>
-          <label for="month">Expiration Date</label>
+          <label for="month">Expiration Date:</label>
           <select id="month" value={this.state.date[0]} onChange={this.monthChange}>
             {this.setMonth()}
           </select>
           <select id="year" value={this.state.date[1]} onChange={this.yearChange}>
             {this.setYear()}
           </select>
-          <label for="cvv">CVV</label>
-          <input type="password" value={this.state.cvv} onChange={this.cvvChange}></input>
+          <label for="cvv">CVV:</label>
+          <input type="password" id="cvv" value={this.state.cvv} onChange={this.cvvChange}></input>
           {this.state.cvv}
         </form>
       </div>
